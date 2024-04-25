@@ -41,7 +41,7 @@ def main() -> None:
     # Get Embeddings model
     embeddings_model = st.sidebar.selectbox(
         "Select Embeddings",
-        options=["nomic-embed-text", "text-embedding-3-small"],
+        options=["text-embedding-3-large","text-embedding-3-small", "nomic-embed-text"],
         help="When you change the embeddings model, the documents will need to be added again.",
     )
     # Set assistant_type in session state
