@@ -13,7 +13,7 @@ db_url = "postgresql+psycopg://ai:ai@localhost:5532/ai"
 
 def get_groq_assistant(
     llm_model: str = "llama3-70b-8192",
-    embeddings_model: str = "text-embedding-3-small",
+    embeddings_model: str = "text-embedding-3-large",
     user_id: Optional[str] = None,
     run_id: Optional[str] = None,
     debug_mode: bool = True,
