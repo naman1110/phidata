@@ -1,7 +1,7 @@
 [project]
 name = "phidata"
-version = "2.3.80"
-description = "Build AI Assistants with memory, knowledge and tools."
+version = "2.3.83"
+description = "Add memory, knowledge and tools to LLMs."
 requires-python = ">=3.8"
 readme = "README.md"
 authors = [
@@ -98,6 +98,7 @@ module = [
   "langchain_core.*",
   "mistralai.*",
   "newspaper.*",
+  "nest_asyncio.*",
   "numpy.*",
   "ollama.*",
   "openai.*",

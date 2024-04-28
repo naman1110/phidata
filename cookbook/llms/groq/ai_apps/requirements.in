@@ -1,12 +1,14 @@
+bs4
+duckduckgo-search
+groq
+nest_asyncio
 ollama
+openai
 pgvector
 phidata
 psycopg[binary]
 pypdf
 sqlalchemy
 streamlit
-bs4
-duckduckgo-search
 tavily-python
 yfinance
-nest_asyncio
