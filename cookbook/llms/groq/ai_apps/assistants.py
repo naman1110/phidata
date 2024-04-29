@@ -4,7 +4,7 @@ from textwrap import dedent
 from phi.assistant import Assistant
 from phi.llm.groq import Groq
 from phi.knowledge import AssistantKnowledge
-from phi.embedder.ollama import OllamaEmbedder
+from phi.embedder.openai import OpenAIEmbedder
 from phi.vectordb.pgvector import PgVector2
 from phi.storage.assistant.postgres import PgAssistantStorage
 from phi.utils.log import logger
@@ -31,7 +31,7 @@ def get_rag_chat_assistant(
             vector_db=PgVector2(
                 db_url=db_url,
                 collection="groq_rag_documents_nomic",
-                embedder=OllamaEmbedder(model="nomic-embed-text", dimensions=768),
+                embedder=OpenAIEmbedder(model='text-embedding-3-large', dimensions=1536),
             ),
             num_documents=num_documents,
         ),
@@ -77,7 +77,7 @@ def get_rag_research_assistant(
             vector_db=PgVector2(
                 db_url=db_url,
                 collection="groq_research_documents_nomic",
-                embedder=OllamaEmbedder(model="nomic-embed-text", dimensions=768),
+                embedder=OpenAIEmbedder(model='text-embedding-3-large', dimensions=1536),
             ),
             num_documents=num_documents,
         ),
