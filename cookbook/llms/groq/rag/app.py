@@ -1,5 +1,3 @@
-from typing import List
-
 import streamlit as st
 from phi.assistant import Assistant
 from phi.document import Document
@@ -128,14 +126,15 @@ def main() -> None:
         if "file_uploader_key" not in st.session_state:
             st.session_state["file_uploader_key"] = 100
 
-        uploaded_file = st.sidebar.file_uploader(
-            "Add a PDF :page_facing_up:", type="pdf", key=st.session_state["file_uploader_key"]
+        uploaded_files = st.sidebar.file_uploader(
+            "Add a PDF :page_facing_up:", type="pdf", accept_multiple_files=True, key=st.session_state["file_uploader_key"]
         )
-        if uploaded_file is not None:
+        if uploaded_files is not None:
+         for uploaded_file in uploaded_files:
             alert = st.sidebar.info("Processing PDF...", icon="🧠")
             rag_name = uploaded_file.name.split(".")[0]
             if f"{rag_name}_uploaded" not in st.session_state:
-                reader = PDFReader()
+                reader = PDFReader(chunk_size=3000)
                 rag_documents: List[Document] = reader.read(uploaded_file)
                 if rag_documents:
                     rag_assistant.knowledge_base.load_documents(rag_documents, upsert=True)
