@@ -8,11 +8,9 @@ from phi.utils.log import logger
 from assistant import get_groq_assistant  # type: ignore
 
 st.set_page_config(
-    page_title="Groq RAG",
-    page_icon=":orange_heart:",
+    page_title="Trainer Assistant 365"
 )
-st.title("RAG with Llama3 on Groq")
-st.markdown("##### :orange_heart: built using [phidata](https://github.com/phidatahq/phidata)")
+st.title("Trainer Assistant 365 ")
 
 
 def restart_assistant():
@@ -134,7 +132,7 @@ def main() -> None:
             alert = st.sidebar.info("Processing PDF...", icon="🧠")
             rag_name = uploaded_file.name.split(".")[0]
             if f"{rag_name}_uploaded" not in st.session_state:
-                reader = PDFReader(chunk_size=3000)
+                reader = PDFReader(chunk_size=3200)
                 rag_documents: List[Document] = reader.read(uploaded_file)
                 if rag_documents:
                     rag_assistant.knowledge_base.load_documents(rag_documents, upsert=True)
