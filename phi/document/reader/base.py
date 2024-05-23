@@ -7,7 +7,7 @@ from phi.document.base import Document
 
 class Reader(BaseModel):
     chunk: bool = True
-    chunk_size: int = 3000
+    chunk_size: int = 1800
     separators: List[str] = ["\n", "\n\n", "\r", "\r\n", "\n\r", "\t", " ", "  "]
 
     def read(self, obj: Any) -> List[Document]:
@@ -33,7 +33,7 @@ class Reader(BaseModel):
         return cleaned_text
 
     def chunk_document(self, document: Document) -> List[Document]:
-        """Chunk the document content into smaller documents"""
+        """Chunk the document content into smaller documents with overlap"""
         content = document.content
         cleaned_content = self.clean_text(content)
         content_length = len(cleaned_content)
@@ -42,6 +42,8 @@ class Reader(BaseModel):
         chunk_meta_data = document.meta_data
 
         start = 0
+        overlap = 100  # Adjust the overlap size as needed
+
         while start < content_length:
             end = start + self.chunk_size
 
@@ -76,5 +78,6 @@ class Reader(BaseModel):
                 )
             )
             chunk_number += 1
-            start = end
+            start = end - overlap  # Overlap for better context capture
         return chunked_documents
+
